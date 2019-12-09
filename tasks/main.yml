@@ -1,0 +1,41 @@
+---
+- name: Directory /root/.ssh
+  file:
+    path: /root/.ssh
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+    recurse: yes
+  when: sshroot is defined
+
+- name: Add ssh-key for root
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+  when: sshroot is defined
+
+- name: User creation
+  user:
+    name: "{{ user }}"
+    shell: /bin/bash
+    groups: adm
+    append: yes
+
+- name: Directory .ssh for user
+  file:
+    path: /home/{{ user }}/.ssh
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+    recurse: yes
+
+- name: Add ssh-key for user
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lookup('file', '{{ item }}') }}"
+  with_items:
+    - "{{ sshkey }}"
