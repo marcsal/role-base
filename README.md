@@ -1,4 +1,4 @@
-ROLE-BASE
+Role Base
 =========
 
 Example Playbook
@@ -11,10 +11,6 @@ Example Playbook
   become_method: sudo
   roles:
     - { role: role-base, user: "marcos" }
-License
--------
-
-BSD
 
 Author Information
 ------------------
