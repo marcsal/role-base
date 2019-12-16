@@ -25,6 +25,14 @@
     groups: adm
     append: yes
 
+- name: Permit root ssh login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin yes'
+  notify:
+    - restart sshd
+
 - name: Directory .ssh for user
   file:
     path: /home/{{ user }}/.ssh
