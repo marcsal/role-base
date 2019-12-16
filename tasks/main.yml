@@ -60,3 +60,6 @@
     owner: root
     group: root
     mode: 0440
+
+- name: Include distro
+  include: "{{ ansible_os_family }}.yml"

@@ -1,0 +1,20 @@
+---
+  - name: Debian basic packages
+    apt:
+      name:
+        - make
+        - build-essential
+        - gcc
+        - unzip
+        - python-pip
+        - wget
+        - curl
+        - git
+        - vim
+        - dnsutils
+        - python-selinux
+      state: present
+      update_cache: yes
+
+  - name: Install latest passlib with pip
+    pip: name=passlib
