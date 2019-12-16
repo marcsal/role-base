@@ -41,3 +41,11 @@
     key: "{{ lookup('file', '{{ item }}') }}"
   with_items:
     - "{{ sshkey }}"
+
+- name: Copy sudoers file
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
