@@ -7,14 +7,16 @@
     group: root
     mode: 0700
     recurse: yes
-  when: sshroot is defined
+  # when: sshroot is defined
+  when: sshroot|bool == True
 
 - name: Add ssh-key for root
   authorized_key:
     user: root
     state: present
     key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
-  when: sshroot is defined
+  # when: sshroot is defined
+  when: sshroot|bool == True
 
 - name: User creation
   user:
