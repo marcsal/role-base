@@ -1,7 +1,7 @@
 galaxy_info:
   author: Marcos Salcedo
   description: Role que realiza configuraciones de usuarios e instala aplicaciones básicas
-  company: your company (optional)
+  company: Goku lts
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,7 +14,7 @@ galaxy_info:
   # - GPL-3.0-only
   # - Apache-2.0
   # - CC-BY-4.0
-  license: license (GPL-2.0-or-later, MIT, etc)
+  license: GPL-2.0-or-later
 
   min_ansible_version: 2.8
 
@@ -34,9 +34,8 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - Bionic
-    # - 18.10
-    # - 19.04
-    # - 19.10
+    - Disco
+    - Eoan
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
