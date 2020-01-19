@@ -8,7 +8,7 @@
     mode: 0700
     recurse: yes
   # when: sshroot is defined
-  when: sshroot|bool == True
+  when: sshroot|bool = True
 
 - name: Add ssh-key for root
   authorized_key:
@@ -19,7 +19,7 @@
     key: "{{ lookup('file', '{{ item }}') }}"
   with_items:
     - "{{ sshkey }}"
-  when: sshroot|bool == True
+  when: sshroot|bool = True
 
 - name: User creation
   user:
