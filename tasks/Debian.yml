@@ -15,6 +15,7 @@
         - python-selinux
       state: present
       update_cache: yes
+      force_apt_get: yes
 
   - name: Install latest passlib with pip
     pip: name=passlib
