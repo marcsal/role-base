@@ -1,32 +1,33 @@
 ---
-- name: Directory /root/.ssh
-  file:
-    path: /root/.ssh
-    state: directory
-    owner: root
-    group: root
-    mode: 0700
-    recurse: yes
-  # when: sshroot is defined
-  when: sshroot|bool
+- block:
+    
+    - name: Directory /root/.ssh
+      file:
+        path: /root/.ssh
+        state: directory
+        owner: root
+        group: root
+        mode: 0700
+        recurse: yes
+      
+    - name: generate SSH key "id_rsa"
+      openssh_keypair:
+        path: "/root/.ssh/{{ sshkey }}"
+        type: rsa
+        size: 4096
+        state: present
+        force: no
 
-- name: generate SSH key "id_rsa"
-  openssh_keypair:
-    path: "{{ sshkey }}"
-    type: rsa
-    size: 4096
-    state: present
-    force: no
-
-- name: Add ssh-key for root
-  authorized_key:
-    user: root
-    state: present
-  #   key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
-  # # when: sshroot is defined
-    key: "{{ lookup('file', '{{ item }}') }}"
-  with_items:
-    - "{{ sshkey }}"
+    - name: Add ssh-key for root
+      authorized_key:
+        user: root
+        state: present
+      #   key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }}"
+      # # when: sshroot is defined
+        key: "{{ lookup('file', '{{ item }}') }}"
+      with_items:
+        - "/root/.ssh/{{ sshkey }}"
+  
   when: sshroot|bool
 
 - name: User creation
@@ -55,10 +56,11 @@
     
 - name: generate SSH key "id_rsa.pub"
   openssh_keypair:
-    path: "{{ sshkey }}"
+    path: "/home/{{ user }}/.ssh/{{ sshkey }}"
     type: rsa
     size: 4096
     state: present
+    owner: "{{ user }}"
     force: no
 
 - name: Add ssh-key for user
@@ -67,7 +69,7 @@
     state: present
     key: "{{ lookup('file', '{{ item }}') }}"
   with_items:
-    - "{{ sshkey }}"
+    - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
 
 - name: Copy sudoers file
   template:
