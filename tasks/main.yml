@@ -30,10 +30,24 @@
   
   when: sshroot|bool
 
+- name: Install ZSH Debian
+  apt:
+    name: zsh
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install ZSH Debian
+  yum:
+    name: zsh
+    state: present
+  when: ansible_os_family == 'RedHat'
+
 - name: User creation
   user:
     name: "{{ user }}"
-    shell: /bin/bash
+    shell: /bin/zsh
     groups: adm
     append: yes
 
