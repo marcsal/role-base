@@ -10,6 +10,14 @@
   # when: sshroot is defined
   when: sshroot|bool
 
+- name: generate SSH key "id_rsa"
+  openssh_keypair:
+    path: "{{ sshkey }}"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+
 - name: Add ssh-key for root
   authorized_key:
     user: root
@@ -44,6 +52,14 @@
     group: "{{ user }}"
     mode: 0700
     recurse: yes
+    
+- name: generate SSH key "id_rsa.pub"
+  openssh_keypair:
+    path: "{{ sshkey }}"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
 
 - name: Add ssh-key for user
   authorized_key:
