@@ -6,13 +6,14 @@
         - build-essential
         - gcc
         - unzip
-        - python-pip
+        - python3-pip
         - wget
         - curl
         - git
         - vim
         - dnsutils
-        - python-selinux
+        - python3-setuptools
+        - python3-selinux
       state: present
       update_cache: yes
       force_apt_get: yes
