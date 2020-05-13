@@ -38,7 +38,7 @@
     force_apt_get: yes
   when: ansible_os_family == 'Debian'
 
-- name: Install ZSH Debian
+- name: Install ZSH RedHat
   yum:
     name: zsh
     state: present
@@ -47,7 +47,7 @@
 - name: User creation
   user:
     name: "{{ user }}"
-    shell: /bin/zsh
+    shell: /bin/bash
     groups: adm
     append: yes
 
