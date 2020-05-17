@@ -25,8 +25,8 @@
 
   - name: Add python3 symlink
     file:
-      src: /usr/bin/python3
-      dest: /usr/bin/python
+      src: /usr/bin/python
+      dest: /usr/bin/python3
       owner: root
       group: root
       state: link
