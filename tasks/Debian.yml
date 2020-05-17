@@ -17,6 +17,19 @@
       state: present
       update_cache: yes
       force_apt_get: yes
+  
+  - name: Remove python symlink
+    file:
+      path: /usr/bin/python
+      state: absent
+
+  - name: Add python3 symlink
+    file:
+      src: /usr/bin/python3
+      dest: /usr/bin/python
+      owner: root
+      group: root
+      state: link
 
   - name: Install latest passlib with pip
     pip: name=passlib
