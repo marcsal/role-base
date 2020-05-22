@@ -83,8 +83,8 @@
         user: "{{ user }}"
         state: present
         key: "{{ lookup('file', '{{ item }}') }}"
-        with_items:
-          - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
+      with_items:
+        - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
   
   tags: auto
 
