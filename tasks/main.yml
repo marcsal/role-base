@@ -69,7 +69,6 @@
     recurse: yes
 
 - block:
-    
     - name: generate SSH key "id_rsa.pub"
       openssh_keypair:
         path: "/home/{{ user }}/.ssh/{{ sshkey }}"
@@ -81,11 +80,11 @@
 
     - name: Add ssh-key for user
       authorized_key:
-      user: "{{ user }}"
-      state: present
-      key: "{{ lookup('file', '{{ item }}') }}"
-      with_items:
-        - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
+        user: "{{ user }}"
+        state: present
+        key: "{{ lookup('file', '{{ item }}') }}"
+        with_items:
+          - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
   
   tags: auto
 
