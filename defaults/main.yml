@@ -1,7 +1,6 @@
 ---
 user: "marcsal"
 autossh: False
-pubkey: True
 jenkinskey: ""
 sshkey: "id_rsa"
 sshroot: False
