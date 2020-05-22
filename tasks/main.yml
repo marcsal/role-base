@@ -67,23 +67,34 @@
     group: "{{ user }}"
     mode: 0700
     recurse: yes
+
+- block:
     
-- name: generate SSH key "id_rsa.pub"
-  openssh_keypair:
-    path: "/home/{{ user }}/.ssh/{{ sshkey }}"
-    type: rsa
-    size: 4096
-    state: present
-    owner: "{{ user }}"
-    force: no
+    - name: generate SSH key "id_rsa.pub"
+      openssh_keypair:
+        path: "/home/{{ user }}/.ssh/{{ sshkey }}"
+        type: rsa
+        size: 4096
+        state: present
+        owner: "{{ user }}"
+        force: no
+
+    - name: Add ssh-key for user
+      authorized_key:
+      user: "{{ user }}"
+      state: present
+      key: "{{ lookup('file', '{{ item }}') }}"
+      with_items:
+        - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
+  
+  tags: auto
 
 - name: Add ssh-key for user
   authorized_key:
     user: "{{ user }}"
     state: present
-    key: "{{ lookup('file', '{{ item }}') }}"
-  with_items:
-    - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
+    key: "/var/lib/jenkins/ansible/files/sshkey/id_rsa_ansible.pub"
+  tags: jenk
 
 - name: Copy sudoers file
   template:
