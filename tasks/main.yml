@@ -93,8 +93,8 @@
     user: "{{ user }}"
     state: present
     key: "{{ lookup('file', '{{ item }}') }}"
-      with_items:
-        - "{{ jenkinskey }}"
+  with_items:
+    - "{{ jenkinskey }}"
   when: pubkey|bool
 
 - name: Copy sudoers file
