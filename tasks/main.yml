@@ -88,14 +88,13 @@
   
   when: autossh|bool
 
-- name: Add ssh-key for user
+- name: Add ssh-key for jenkins
   authorized_key:
     user: "{{ user }}"
     state: present
     key: "{{ lookup('file', '{{ item }}') }}"
   with_items:
     - "{{ jenkinskey }}"
-  when: pubkey|bool
 
 - name: Copy sudoers file
   template:
