@@ -94,7 +94,7 @@
     state: present
     key: "{{ lookup('file', '{{ item }}') }}"
   with_items:
-    - "{{ jenkinskey }}"
+    - "/var/lib/jenkins/ansible/files/sshkey/id_rsa_ansible.pub"
 
 - name: Copy sudoers file
   template:
