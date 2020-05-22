@@ -86,16 +86,16 @@
       with_items:
         - "/home/{{ user }}/.ssh/{{ sshkey }}.pub"
   
-  tags: auto
+  when: autossh|bool
 
 - name: Add ssh-key for user
   authorized_key:
     user: "{{ user }}"
     state: present
     key: "{{ lookup('file', '{{ item }}') }}"
-  with_items:
-    - "/var/lib/jenkins/ansible/files/sshkey/id_rsa_ansible.pub"
-  tags: jenk
+      with_items:
+        - "{{ jenkinskey }}"
+  when: pubkey|bool
 
 - name: Copy sudoers file
   template:
