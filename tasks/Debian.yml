@@ -21,5 +21,5 @@
   - name: Install latest passlib with pip
     pip:
       name: passlib
-      executable: pip3.3
+      executable: pip3
 
