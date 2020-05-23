@@ -18,10 +18,5 @@
       update_cache: yes
       force_apt_get: yes
   
-  - name: Remove python symlink
-    file:
-      path: /usr/bin/python
-      state: absent
-
   - name: Install latest passlib with pip
     pip: name=passlib
