@@ -19,4 +19,7 @@
       force_apt_get: yes
   
   - name: Install latest passlib with pip
-    pip: name=passlib
+    pip:
+      name: passlib
+      executable: pip3.3
+
