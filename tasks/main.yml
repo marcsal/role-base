@@ -95,6 +95,13 @@
     key: "{{ jenkinskey }}"
   when: jenssh|bool
 
+- name: Add ssh-key for {{ user }}
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lpkey }}"
+  when: not autossh
+
 - name: Copy sudoers file
   template:
     src: sudoers.j2
