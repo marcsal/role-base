@@ -93,6 +93,7 @@
     user: "{{ user }}"
     state: present
     key: "{{ jenkinskey }}"
+  when: jenssh|bool
 
 - name: Copy sudoers file
   template:
