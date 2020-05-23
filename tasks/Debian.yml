@@ -23,13 +23,5 @@
       path: /usr/bin/python
       state: absent
 
-  - name: Add python3 symlink
-    file:
-      src: /usr/bin/python
-      dest: /usr/bin/python3
-      owner: root
-      group: root
-      state: link
-
   - name: Install latest passlib with pip
     pip: name=passlib
