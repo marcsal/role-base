@@ -1,0 +1,8 @@
+---
+- hosts: all
+  remote_user: marcos
+  become: true
+  become_user: root
+  become_method: sudo
+  roles:
+    - { role: marcsal.role_base }
