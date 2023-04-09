@@ -24,7 +24,6 @@
     name:
       - make
       - unzip
-      - python2-pip
       - wget
       - curl
       - gcc
